@@ -11,4 +11,13 @@ async function getTicketsType(_req: Request, res: Response) {
   }
 }
 
-export { getTicketsType };
+async function getTickets(_req: Request, res: Response) {
+  try {
+    const ticket = await ticketsService.getTicket();
+    return res.send(ticket);
+  } catch (error) {
+    return res.sendStatus(httpStatus.NOT_FOUND);
+  }
+}
+
+export { getTicketsType, getTickets };
