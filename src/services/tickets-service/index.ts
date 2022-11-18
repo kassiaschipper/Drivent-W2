@@ -8,8 +8,15 @@ async function getTypes(): Promise<TicketType[]> {
   return type;
 }
 
+async function getTicket() {
+  const ticket = await ticketsRepository.findManyTickets();
+  if (!ticket) throw notFoundError();
+  return ticket;
+}
+
 const ticketsService = {
-  getTypes
+  getTypes,
+  getTicket
 };
 
 export default ticketsService;
