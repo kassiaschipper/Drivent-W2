@@ -8,15 +8,22 @@ async function getTypes(): Promise<TicketType[]> {
   return type;
 }
 
-async function getTicket() {
-  const ticket = await ticketsRepository.findManyTickets();
+async function getTicket(enrollmentId: number) {
+  const ticket = await ticketsRepository.findFirstTicket(enrollmentId);
   if (!ticket) throw notFoundError();
+  
+  return ticket;
+}
+
+async function createTicket(ticketTypeId: number, enrollmentId: number) {
+  const ticket = await ticketsRepository.createTicket(ticketTypeId, enrollmentId);
   return ticket;
 }
 
 const ticketsService = {
   getTypes,
-  getTicket
+  getTicket,
+  createTicket
 };
 
 export default ticketsService;
