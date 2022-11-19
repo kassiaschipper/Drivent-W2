@@ -32,11 +32,20 @@ async function createTicket(ticketTypeId: number, enrollmentId: number) {
   });
 }
 
+async function findTicketById(ticketId: number) {
+  return prisma.ticket.findFirst({
+    where: {
+      id: ticketId,
+    }
+  });
+}
+
 const ticketsRepository = {
   findMany,
   findFirstTicket,
   findFirstEnrollment,
-  createTicket
+  createTicket,
+  findTicketById
 };
 
 export default ticketsRepository;

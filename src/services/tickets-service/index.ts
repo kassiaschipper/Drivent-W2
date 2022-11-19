@@ -20,10 +20,16 @@ async function createTicket(ticketTypeId: number, enrollmentId: number) {
   return ticket;
 }
 
+async function getTicketById(ticketId: number) {
+  const ticket = await ticketsRepository.findTicketById(ticketId);
+  return ticket;
+}
+
 const ticketsService = {
   getTypes,
   getTicket,
-  createTicket
+  createTicket,
+  getTicketById
 };
 
 export default ticketsService;
