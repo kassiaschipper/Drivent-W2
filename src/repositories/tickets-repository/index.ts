@@ -36,7 +36,27 @@ async function findTicketById(ticketId: number) {
   return prisma.ticket.findFirst({
     where: {
       id: ticketId,
+    },
+    include: {
+      TicketType: true
     }
+  });
+}
+
+async function updateTicketStatus(ticketId: number) {
+  return prisma.ticket.update({
+    where: { 
+      id: ticketId,
+    },
+    data: {
+      status: "PAID",      
+    }
+  });
+}
+
+async function findTicketByEnrollmentId(enrollmentId: number) {
+  return prisma.ticket.findFirst({
+    where: { enrollmentId }
   });
 }
 
@@ -45,7 +65,9 @@ const ticketsRepository = {
   findFirstTicket,
   findFirstEnrollment,
   createTicket,
-  findTicketById
+  findTicketById,
+  updateTicketStatus,
+  findTicketByEnrollmentId
 };
 
 export default ticketsRepository;
