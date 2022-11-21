@@ -15,10 +15,6 @@ async function findFirstTicket(enrollmentId: number) {
   });
 }
 
-async function findFirstEnrollment() {
-  return prisma.enrollment.findFirst();
-}
-
 async function createTicket(ticketTypeId: number, enrollmentId: number) {
   return prisma.ticket.create({
     data: {
@@ -63,7 +59,7 @@ async function findTicketByEnrollmentId(enrollmentId: number) {
 const ticketsRepository = {
   findMany,
   findFirstTicket,
-  findFirstEnrollment,
+  //findFirstEnrollment,
   createTicket,
   findTicketById,
   updateTicketStatus,
